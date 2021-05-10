@@ -1,0 +1,38 @@
+Part 1: The Call Stack
+	First time line 5 runs:
+		fib(5)
+		main
+		
+	First time line 7 runs:
+		fib(2)
+		fib(3)
+		fib(4)
+		fib(5)
+		main
+	
+	First time fib(0) is in the stack:
+		fib(0)
+		fib(2)
+		fib(3)
+		fib(4)
+		fib(5)
+		main
+
+Part 4: Implementation Explanation
+	order(int*, int*):
+		Uses a bit of math to swap the values, if needed:
+			let   a = a + b,
+			then  b = (a + b) - b = a
+			and   a = (a + b) - ((a + b) - b) 
+			        = (a + b) - b 
+				    = a
+		
+		This implementation is superior to using a temporary 
+		variable in that it does not consume sizeof(int)
+		extra bytes of memory.
+	
+	swap_pointers(int**, int**):
+		Uses the previously mentioned algorithm for swapping with
+		a temporary variable to swap pointers. I cannot use the
+		mathematical algorithm used in order(int*, int*) because
+		C does not define addition for pointers.

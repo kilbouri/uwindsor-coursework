@@ -1,0 +1,82 @@
+1d: Explanation
+    create_list mallocs a new slist and sets the head to null.
+
+    insert_student creates a new node, then inserts it. If the list's head is
+    NULL, or the id is less than the id of the head node, then the head node
+    is assigned as the next to the new head, then the new head is placed in
+    the list. Otherwise, the list is traversed until the next node's ID would
+    exceed the one we are adding. The next node is set as the new node's next,
+    then the new node takes its place in the previous node.
+
+    remove_student traverses the list, looking for a student with the given ID.
+    False is returned if none is found. Otherwise, if the record is the head node,
+    it's next node is set as the new head. If it is not the head node, then
+    its next is set as the next for the node that points to it. Finally,
+    true is returned.
+
+    find_student traverses the list until a matching ID, or the end of the list,
+    is found. If the ID of the node that the traversal terminated on matches the
+    ID being searched for, then the name is returned. Otherwise, NULL is returned.
+
+    free_list calls a utility function which recursively frees all child nodes.
+    The utility function builds a call stack that includes a free_node call for
+    all of the nodes in the list. Finally, the list itself is freed.
+
+    merge_lists traverses both lists, selecting the node that has the lowest ID
+    each time. The node is then appended to the output list. Once both lists
+    have been fully traversed, free is called on both input lists, but not 
+    free_list as free_list would also destroy the data stored in each node.
+    This is undesireable because the nodes are reused in the output list,
+    with only their next addresses potentially changed.
+
+1d: Running times
+    create list runs in constant time (assuming malloc is constant)
+
+    insert_student runs in O(n) (assuming strcmp is constant, based off 
+    the statement, "You can assume the name of each student is of length O(1)".
+    I'm not entirely sure how a length can be O(1), since it's a variable, not
+    a function...) since the list is traversed once, up to the point where the
+    next ID would be greater than what we're inserting.
+
+    find_student also runs in O(n) (again, making the assumption strcmp is 
+    constant) since it also only traverses the list until a match is found.
+
+    free_list is O(n + 1) as it frees all n nodes, plus the list itself.
+
+    merge_lists is O(n + m), where n and m are the length of the two lists
+    respectively, since each list is only traversed once. Since insert_student
+    isn't used (for speed optimization. Were it used, running time would be
+    O((n + m)^2), which is significantly worse), the out list is never
+    traversed. A reference is kept to the last node in the out list so that
+    appending a node can be performed without re-traversing the entire list.
+
+2d: Explanation
+    insert_node returns a new node if the tree is empty (NULL). Otherwise, it 
+    recursively traverses the tree, selecting the path based on the following
+    conditions (in order):
+        - if the word matches that of the current node, we should update the
+          value and return.
+        - if the word precedes the current node, and the current node has a
+          non-NULL left-child, then we move to the left subtree.
+        - if the word succeeds the current node, and the current node has a 
+          non-NULL right-child, then we move to the right subtree.
+        - if the word precedes the current node, but the current node does
+          not have a non-NULL left-child, then we add the node as a left-child.
+        - if the word precedes the current node, but the current node does
+          not have a non-NULL right-child, then we add the node as a right-child.
+    The order that words are added to the tree will directly impact where they
+    end up inside the tree. The first word added will always form the root of
+    the tree. Since the root never changes, the root is always returned,
+    unchanged, unless the tree was empty (NULL) to start with.
+
+    lookup_word returns 0 if the tree is empty. Otherwise, it recursively
+    traverses the tree, selecting its path based purely on whether the word
+    precedes or succeeds the current node. Once a matching node is found,
+    its value is returned. Remember that an empty tree automatically returns
+    0, so finding a word that doesn't exist will eventually reach the location
+    it would have otherwise been in the tree (which will be NULL), so 0 is
+    returned.
+
+    free_tree recursively frees each side of the given node, unless the node is NULL.
+    This in effect creates a call stack that frees each leaf, then its parents,
+    then its parent's parents, and so on back to the root.

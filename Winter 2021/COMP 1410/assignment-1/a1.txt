@@ -1,0 +1,12 @@
+1c - choose(n, m) explanation:
+    First, we use two conditions to make sure the condition, 0 <= m <= n, is met for the binomial condition.
+    Then, we look to see if we've met one of the recursive base cases: m = 0, or n = m. If we have, return 1.
+    Finally, if we've met the conditions and we aren't at the base case yet, we create another stack frame and repeat the process.
+
+2d - num_divisors_up_to_k(n, k) and is_prime(n) explanations:
+    num_divisors_up_to_k(n, k) uses recursive iteration from k to 0 to count the number of factors of n between k and 1.
+    is_prime(n) leverages num_divisors_up_to_k(n, k) by observing that there will only ever be two factors - 1 and n - in the range [1, n] for some prime number n. Additionally, because num_divisors_up_to_k(n, k) only counts each factor once, 1 is automatically excluded from the primes.
+
+3d - collatz(n) explanation:
+    For each step of the collatz sequence, the function first looks to see if we are at 1 (or lower). If so, it returns 0 as no steps need to be taken to reach 1, we're already there! If not, it calculates the next term - either 3n + 1 or n/2 - accordingly and passes it back to itself. At each step, n is printed followed by an arrow, except for the base case which replaces the arrow with a new line.
+    collatz_muted(n) is an identical implementation, with the printf statements ommitted to keep the console clear during assert testing. 

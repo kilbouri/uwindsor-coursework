@@ -1,0 +1,83 @@
+\documentclass[12pt]{book}
+\setlength{\headheight}{15pt}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{color, colortbl}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{lastpage}
+
+% begin custom header shit
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{COMP2650 Lecture 5 - XOR and XNOR}
+\rhead{Isaac Kilbourne (110043640)}
+\rfoot{Page \thepage\ of \pageref{LastPage}}
+% end custom header shit
+
+\definecolor{LightRed}{rgb}{1, 0.6, 0.6}
+\definecolor{LightGreen}{rgb}{0.6, 1, 0.6}
+\newcolumntype{R}{>{\columncolor{LightRed}}c}
+\newcolumntype{G}{>{\columncolor{LightGreen}}c}
+
+\newenvironment{indented}[1] {
+	\begin{list}{}{\setlength{\leftmargin}{#1}}
+		\item[]
+}{\end{list}}
+
+\begin{document}
+	\noindent
+	1. Using truth tables or boolean postulates, prove that \textbf{XOR} is:
+	\begin{indented}{5mm}
+		a. Commutative: $x \oplus y = y \oplus x$
+		\begin{indented}{5mm}
+			$\begin{array}{c|c|G|G}
+				$x$ & $y$ & x \oplus y & y \oplus x\\
+				\hline
+				1 & 1 & 0 & 0 \\
+				1 & 0 & 1 & 1 \\
+				0 & 1 & 1 & 1 \\
+				0 & 0 & 0 & 0 \\
+			\end{array}$
+	
+			$\therefore$ Since the highlighted columns match, the \textbf{XOR} operation is commutative.
+		\end{indented}
+	
+		b. Associative: $x \oplus (y \oplus z) = (x \oplus y) \oplus z = x \oplus y \oplus z$
+		\begin{indented}{5mm}
+			$\begin{array}{c|c|c|c|G|c|G}
+				$x$ & $y$ & $z$ & $y$ \oplus $z$ & $x$ \oplus $(y$ \oplus $z)$ & $x$ \oplus $y$ & $(x$ \oplus $y)$ \oplus $z$\\
+				\hline
+				1 & 1 & 1 & 0 & 1 & 0 & 1 \\
+				1 & 1 & 0 & 1 & 0 & 0 & 0 \\
+				1 & 0 & 1 & 1 & 0 & 1 & 0 \\
+				1 & 0 & 0 & 0 & 1 & 1 & 1 \\
+				0 & 1 & 1 & 0 & 0 & 1 & 0 \\
+				0 & 1 & 0 & 1 & 1 & 1 & 1 \\
+				0 & 0 & 1 & 1 & 1 & 0 & 1 \\
+				0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			\end{array}$
+
+			$\therefore$ Since the highlighted columns match, the \textbf{XOR} operation is associative.
+		\end{indented}
+	\end{indented}
+
+	\noindent
+	2. Prove that \textbf{XOR} is not distributive over \textbf{AND}, i.e., $x \oplus (yz) \neq (x \oplus y)(x \oplus z)$
+	\begin{indented}{5mm}
+		$\begin{array}{c|c|c|c|R|c|c|R}
+			$x$ & $y$ & $z$ & $yz$ & $x$ \oplus $(yz)$ & $x$ \oplus $y$ & $x$ \oplus $z$ & ($x$ \oplus $y$)($x$ \oplus $z$) \\
+			\hline
+			1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 \\
+			1 & 1 & 0 & 0 & 1 & 0 & 1 & 0 \\
+			1 & 0 & 1 & 0 & 1 & 1 & 0 & 0 \\
+			1 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+			0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 \\
+			0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		\end{array}$
+
+		$\therefore$ Since the highlighted columns do not match, the \textbf{XOR} operation is not distributive over \textbf{AND}.
+	\end{indented}
+\end{document}

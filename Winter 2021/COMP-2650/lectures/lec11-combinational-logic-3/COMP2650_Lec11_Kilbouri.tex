@@ -1,0 +1,70 @@
+\documentclass[12pt]{book}
+\setlength{\headheight}{15pt}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{color, colortbl}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{lastpage}
+\usepackage{karnaugh-map}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{graphicx}
+
+\graphicspath{ {./graphics/} }
+
+% begin custom header shit
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{COMP2650 Lecture 11 - Combinational Logic III}
+\rhead{Isaac Kilbourne (110043640)}
+\rfoot{Page \thepage\ of \pageref{LastPage}}
+% end custom header shit
+
+\definecolor{LightRed}{rgb}{1, 0.6, 0.6}
+\definecolor{LightGreen}{rgb}{0.6, 1, 0.6}
+\newcolumntype{R}{>{\columncolor{LightRed}}c}
+\newcolumntype{G}{>{\columncolor{LightGreen}}c}
+
+\newenvironment{indented} {
+	\begin{list}{}{\setlength{\leftmargin}{5mm}}
+	\item[]
+}{\end{list}}
+	
+\raggedbottom 
+\begin{document}
+    \noindent
+    3. Construct a 16-to-1 multiplexer with 8-1 and 2-1 multiplexers.
+    Use block diagrams.
+    \includegraphics{q3_16-to-1-MUX}
+    
+    \vfill
+    \footnotetext[0]{The software used to draw circuits has an issue with
+    exporting label text. I apologize for any inconvenience.}
+    \pagebreak
+
+    \noindent
+    6. Implement a full-adder with two 4-1 multiplexers.
+    
+    \begin{indented}
+        \begin{tabular}{c|c|c||c|c||c|c|c}
+            $A$ & $B$ & Carry In & Sum & Carry Out & I\# & Connection (Sum) & Connection (Carry)\\
+            \hline
+            0 & 0 & 0 & 0 & 0 & \multirow{2}{*}{0} & \multirow{2}{*}{Carry In} & \multirow{2}{*}{0} \\
+            0 & 0 & 1 & 1 & 0 & & & \\
+            \hline
+            0 & 1 & 0 & 1 & 0 & \multirow{2}{*}{1} & \multirow{2}{*}{$\overline{\text{Carry In}}$} & \multirow{2}{*}{Carry In} \\
+            0 & 1 & 1 & 0 & 1 & & & \\
+            \hline
+            1 & 0 & 0 & 1 & 0 & \multirow{2}{*}{2} & \multirow{2}{*}{$\overline{\text{Carry In}}$} & \multirow{2}{*}{Carry In} \\
+            1 & 0 & 1 & 0 & 1 & & & \\
+            \hline
+            1 & 1 & 0 & 0 & 1 & \multirow{2}{*}{3} & \multirow{2}{*}{Carry In} & \multirow{2}{*}{1} \\
+            1 & 1 & 1 & 1 & 1 & & & \\        
+        \end{tabular}
+    \end{indented}
+
+    \includegraphics[height=4.5in]{q6_muxadder}
+\end{document}
+		

@@ -1,0 +1,20 @@
+Part 3: Explanations
+    create_node allocates memory for a tree node. If the node is not null, it copies the provided
+    data into the node. The node is then returned. Will not crash in the event of allocation
+    failure because the result is not accessed or modified unless the address is non-NULL.
+    O(1) because the size of a node is independent of the number of nodes already in the tree.
+
+    free_tree recursively frees the children and then itself. All nodes will be reached, with 
+    the leaves being freed first, followed by their parents, then the parent's parent's, and
+    so on up the call stack. O(n) because it must visit all nodes.
+
+    height returns 0 when the root is NULL. Otherwise, it returns one more than the height of
+    its longest child. Through recursion, height will consider all possible paths, selecting only
+    the longest as the program makes its way back up the call stack. Since all nodes are visited
+    as the longest path is determined, height is O(n) where n is the number of nodes in the tree.
+
+    num_leaves performs a similar algorithm to height. Instead of selecting the longest path,
+    however, it counts the number of leaves of each child. Again, if a node is NULL, 0 is returned.
+    A node is either a leaf, with both children being NULL, or not a leaf, with at least one child 
+    node. Thus, the minimum return value of a node that is not NULL is 1. Again, all nodes are 
+    visited, only once, so the running time is O(n) where n is the number of nodes in the tree.

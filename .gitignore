@@ -1,0 +1,5 @@
+**/Submitted
+**/res
+*.exe
+*.vscode-workspace
+**/*.cddx

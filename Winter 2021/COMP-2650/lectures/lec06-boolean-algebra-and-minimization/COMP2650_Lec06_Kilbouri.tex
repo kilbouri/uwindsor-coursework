@@ -1,0 +1,251 @@
+\documentclass[12pt]{book}
+\setlength{\headheight}{15pt}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{color, colortbl}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{lastpage}
+
+
+% begin custom header shit
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{COMP2650 Lecture 6 - Boolean Algebra \& Minimization}
+\rhead{Isaac Kilbourne (110043640)}
+\rfoot{Page \thepage\ of \pageref{LastPage}}
+% end custom header shit
+
+\definecolor{LightRed}{rgb}{1, 0.6, 0.6}
+\definecolor{LightGreen}{rgb}{0.6, 1, 0.6}
+\newcolumntype{R}{>{\columncolor{LightRed}}c}
+\newcolumntype{G}{>{\columncolor{LightGreen}}c}
+
+\newenvironment{indented}[1] {
+	\begin{list}{}{\setlength{\leftmargin}{#1}}
+		\item[]
+	}{\end{list}}
+		
+
+\raggedbottom 
+\begin{document}
+	\noindent
+	1. Using truth tables, prove that given two arbitrary Boolean functions $F_1$ and $F_2$:
+	\begin{indented}{5mm}
+		a. $E = F_1 + F_2$ has the minterms that are in either $F_1$ or $F_2$ when it is in \textbf{Sum of Products} canonical form.
+		\begin{indented}{5mm}
+			$\begin{array}{c|c|c}
+				F_1 & F_2 & E=F_1 + F_2 \\
+				\hline
+				0 & 0 & 0 \\
+				0 & 1 & 1 \\
+				1 & 0 & 1 \\
+				1 & 1 & 1 \\
+			\end{array}$
+
+			As shown in the truth table, when $E = F_1 + F_2$, the sets of minterms in each function are united together.
+		\end{indented}
+		
+		b. $G = F_1F_2$ contains only the minterms that are common to both $F_1$ and $F_2$.
+		\begin{indented}{5mm}
+			$\begin{array}{c|c|c}
+				F_1 & F_2 & G=F_1F_2 \\
+				\hline
+				0 & 0 & 0 \\
+				0 & 1 & 0 \\
+				1 & 0 & 0 \\
+				1 & 1 & 1 \\
+			\end{array}$
+
+			As shown in the truth table, when $G = F_1F_2$, the sets of minterms in each function are intersected.
+		\end{indented}
+	\end{indented}
+
+	\noindent
+	2. Obtain  the  truth  table  of  the  following  functions,  and  express  each  function  in  sum of products (SoP) and product of sums (PoS) in canonical forms
+	\begin{indented}{5mm}
+		a. $(c' + d)(b + c')$
+		\begin{indented}{5mm}
+			$\begin{array}{c|c|c||c||c|c||c|c}
+				b & c & d & c' & (c' + d) & (b + c') & (c' + d)(b + c') & \#\\
+				\hline
+				0 & 0 & 0 & 1  &    1     &    1     &        1         &  0 \\
+				0 & 0 & 1 & 1  &    1     &    1     &        1         &  1 \\
+				0 & 1 & 0 & 0  &    0     &    0     &        0         &  2 \\
+				0 & 1 & 1 & 0  &    1     &    0     &        0         &  3 \\
+				1 & 0 & 0 & 1  &    1     &    1     &        1         &  4 \\
+				1 & 0 & 1 & 1  &    1     &    1     &        1         &  5 \\
+				1 & 1 & 0 & 0  &    0     &    1     &        0         &  6 \\
+				1 & 1 & 1 & 0  &    1     &    1     &        1         &  7 \\
+			\end{array}$
+			
+			\textbf{Sum of Products (SoP):}
+			\begin{indented}{5mm}
+				$\sum m_{0, 1, 4, 5, 7} = (b'c'd')+(b'c'd)+(bc'd')+(bc'd)+(bcd)$
+			\end{indented}
+			
+			\textbf{Product of Sums (PoS):}
+			\begin{indented}{5mm}
+				$\prod M_{2, 3, 6} = (b+c'+d)(b+c'+d')(b'+c'+d)$
+			\end{indented}
+		\end{indented}
+		
+		\pagebreak
+
+		b. $bd' + acd' + ab'c + a'c'$
+		\begin{indented}{5mm}
+			$\begin{array}{c|c|c|c||c|c|c|c||c|c|c|c||c|c}
+				a & b & c & d & a' & b' & c' & d' & bd' & acd' & ab'c & a'c' & bd' + acd' + ab'c + a'c' & \#  \\
+				\hline
+				0 & 0 & 0 & 0 & 1  & 1  & 1  & 1  &  0  &  0   &  0   &  1   &            1            &  0  \\
+				0 & 0 & 0 & 1 & 1  & 1  & 1  & 0  &  0  &  0   &  0   &  1   &            1            &  1  \\
+				0 & 0 & 1 & 0 & 1  & 1  & 0  & 1  &  0  &  0   &  0   &  0   &            0            &  2  \\
+				0 & 0 & 1 & 1 & 1  & 1  & 0  & 0  &  0  &  0   &  0   &  0   &            0            &  3  \\
+				0 & 1 & 0 & 0 & 1  & 0  & 1  & 1  &  1  &  0   &  0   &  1   &            1            &  4  \\
+				0 & 1 & 0 & 1 & 1  & 0  & 1  & 0  &  0  &  0   &  0   &  1   &            1            &  5  \\
+				0 & 1 & 1 & 0 & 1  & 0  & 0  & 1  &  1  &  0   &  0   &  0   &            1            &  6  \\
+				0 & 1 & 1 & 1 & 1  & 0  & 0  & 0  &  0  &  0   &  0   &  0   &            0            &  7  \\
+				1 & 0 & 0 & 0 & 0  & 1  & 1  & 1  &  0  &  0   &  0   &  0   &            0            &  8  \\
+				1 & 0 & 0 & 1 & 0  & 1  & 1  & 0  &  0  &  0   &  0   &  0   &            0            &  9  \\
+				1 & 0 & 1 & 0 & 0  & 1  & 0  & 1  &  0  &  1   &  1   &  0   &            1            &  10 \\
+				1 & 0 & 1 & 1 & 0  & 1  & 0  & 0  &  0  &  0   &  1   &  0   &            1            &  11 \\
+				1 & 1 & 0 & 0 & 0  & 0  & 1  & 1  &  1  &  0   &  0   &  0   &            1            &  12 \\
+				1 & 1 & 0 & 1 & 0  & 0  & 1  & 0  &  0  &  0   &  0   &  0   &            0            &  13 \\
+				1 & 1 & 1 & 0 & 0  & 0  & 0  & 1  &  1  &  1   &  0   &  0   &            1            &  14 \\
+				1 & 1 & 1 & 1 & 0  & 0  & 0  & 0  &  0  &  0   &  0   &  0   &            0            &  15 \\
+			\end{array}$
+
+			\textbf{Sum of Products (SoP):}
+			\begin{indented}{5mm}
+				$\begin{aligned}
+					\textstyle\sum m_{0, 1, 4, 5, 6, 10, 11, 12, 14} &= (a'b'c'd')+(a'b'c'd)+(a'bc'd')+(a'bc'd)\\
+					&\text{\ \ \ \ }(a'bcd')+(ab'cd')+(ab'cd)+(abc'd')+(abcd')
+				\end{aligned}$
+			\end{indented}
+
+			\textbf{Product of Sums (PoS):}
+			\begin{indented}{5mm}
+				$\begin{aligned}
+					\textstyle\prod M_{2, 3, 7, 8, 9, 13, 15} &= (a+b+c'+d)(a+b+c'+d')(a+b'+c'+d')(a'+b+c+d)\\
+					&\text{\ \ \ \ }(a'+b+c+d')(a'+b'+c+d')(a'+b'+c'+d')
+				\end{aligned}$
+			\end{indented}
+		\end{indented}
+	\end{indented}
+
+	\noindent
+	3. Express the complement of the following functions in \textbf{Sum of minterms} form:
+	\begin{indented}{5mm}
+		a. $F(A,B,C,D) = \sum m_{2, 4, 6, 10, 12, 14} \to F'(A,B,C,D) = \sum m_?$
+		\begin{indented}{5mm}
+			Consider the truth tables of an arbitrary function F and it's complement: where there are 0s in the result, 
+			the other has 1s. Therefore, all minterms should be present between the two funcitons. Therefore, a quick
+			and simple way to compute the minterms of F' is to let the Universe of Discourse be all of the minterms possible
+			for any arbitrary function with the matching number of variables, then take the compliment of the set of minterms
+			in F with respect to this new Universe.
+
+			$U = \{0, 1, \dots, (2^4 - 1 = 15)\}$
+			
+			$\overline{\{2, 4, 6, 10, 12, 14\}} = \{1, 3, 5, 9, 11, 13, 15\}$
+			
+			\medskip
+			$\therefore F'(A,B,C,D) = \sum m_{1, 3, 5, 9, 11, 13, 15}$
+		\end{indented}
+
+		\pagebreak
+
+		b. $F(x,y,z) = \prod M_{3, 5, 7} \to F'(x,y,z) = \sum m_?$
+		\begin{indented}{5mm}
+			Again, considering the truth tables of F and it's complement, it follows clearly that
+			if F has some minterm m$_n$ then F's complement should have the MAXTERM M$_n$, since
+			wherever F has a True result, F' will have a False result.
+
+			$F(x,y,z) = \prod M_{3, 5, 7}$
+
+			$F'(x,y,z) = \sum m_{3, 5, 7}$
+		\end{indented}
+	\end{indented}
+
+	\noindent
+	4. Convert each of the following to the opposite cannonical form, then simplify if possible:
+	\begin{indented}{5mm}
+		a. $F(x,y,z) = \sum m_{1, 3, 5}$
+		\begin{indented}{5mm}
+			\textbf{Cannonical Conversion (described above):}
+
+			$U = \{0, 1, \dots 6, 7\}$
+
+			$\overline{\{1, 3, 5\}} = \{0, 2, 4, 6, 7\}$
+			\medskip
+			
+			$\therefore F = \prod M_{0, 2, 4, 6, 7}$.
+			
+			\medskip
+			\textbf{Simplification:}
+			
+			$\begin{aligned}
+				%verified
+				F &= (x+y+z)(x+y'+z)(x'+y+z)(x'+y'+z)(x'+y'+z')\\
+				&= (x+z)(x'+y+z)(x'+y'+z)(x'+y'+z')\\
+				&= (x+z)(x'+z)(x'+y'+z')\\
+				&= (z)(x'+y'+z')\\
+				&= zx' + zy'\\
+			\end{aligned}$
+		\end{indented}
+
+		b. $F(A,B,C,D) = \prod M_{3, 5, 8, 11}$
+		\begin{indented}{5mm}
+			\textbf{Cannonical Conversion (described above):}
+			
+			$U = \{0, 1, \dots 14, 15\}$
+			
+			$\overline{\{3, 5, 8, 11\}} = \{0, 1, 2, 4, 6, 7, 9, 10, 12, 13, 14, 15\}$
+			\medskip
+			
+			$\therefore F = \sum m_{0, 1, 2, 4, 6, 7, 9, 10, 12, 13, 14, 15}$.
+			
+			\bigskip
+			\textbf{Simplification}
+			
+			$\begin{aligned}
+				F &= \textstyle\sum m_{0, 1, 2, 4, 6, 7, 9, 10, 12, 13, 14, 15}\\
+				F'&= \textstyle\prod M_{0, 1, 2, 4, 6, 7, 9, 10, 12, 13, 14, 15}\\
+				% verified solution
+				&= (A+B+C+D)(A+B+C+D')(A+B+C'+D)(A+B'+C+D)\\
+				&\text{\ \ \ \ }(A+B'+C'+D)(A+B'+C'+D')(A'+B+C+D')\\
+				&\text{\ \ \ \ }(A'+B+C'+D)(A'+B'+C+D)(A'+B'+C+D')\\
+				&\text{\ \ \ \ }(A'+B'+C'+D)(A'+B'+C'+D')\\
+				&= (A+B+C)(A+B+C'+D)(A+B'+C+D)(A+B'+C'+D)\\
+				&\text{\ \ \ \ }(A+B'+C'+D')(A'+B+C+D')(A'+B+C'+D)\\
+				&\text{\ \ \ \ }(A'+B'+C+D)(A'+B'+C+D')(A'+B'+C'+D)\\
+				&\text{\ \ \ \ }(A'+B'+C'+D')\\
+			\end{aligned}$
+
+			\pagebreak
+
+			$\begin{aligned}
+				&= (A+B+CD)(A+B'+C+D)(A+B'+C'+D)(A+B'+C'+D')\\
+				&\text{\ \ \ \ }(A'+B+C+D')(A'+B+C'+D)(A'+B'+C+D)\\
+				&\text{\ \ \ \ }(A'+B'+C+D')(A'+B'+C'+D)(A'+B'+C'+D')\\
+				&= (A+BC+BD+CD)(A+B'+C'+D)(A+B'+C'+D')\\
+				&\text{\ \ \ \ }(A'+B+C+D')(A'+B+C'+D)(A'+B'+C+D)\\
+				&\text{\ \ \ \ }(A'+B'+C+D')(A'+B'+C')\\
+				&= (A+BC+BD+CD)(A+B'+C')(A'+B+C+D')(A'+B+C'+D)\\
+				&\text{\ \ \ \ }(A'+B'+C+D)(A'+B'+C+D')(A'+B'+C')\\
+				&= (A+BC+BD+CD)(A+B'+C')(A'+B+C+D')(A'+B+C'+D)\\
+				&\text{\ \ \ \ }(A'+B'+C+D)(A'+B'+C'D')\\
+				&= (A+BC+BD+CD)(A+B'+C')(A'+B+C+D')(A'+B+C'+D)\\
+				&\text{\ \ \ \ }(A'+B')\\
+				&= (A+BC+BD+CD)(A+B'+C')(A'+B+C+D')(A'+B'C'+B'D)\\
+				&= (A+BC+BD+CD)(A+B'+C')(A'+B'CD+B'C'D')\\
+				&= AB'C'D' + A'BC'D + B'CD\\
+				F&=(AB'C'D' + A'BC'D + B'CD)'\\
+				&= (AB'C'D')'(A'BC'D)'(B'CD)'\\
+				&= (A'+B+C+D)(A+B'+C+D')(B+C'+D')\\
+				&= (A'B'+A'D'+BA+BD'+C+DA+DB')(B+C'+D')\\
+				&= AB+BC+BD'+A'B'C'+AC'D+B'C'D+A'D'+D'C\\
+			\end{aligned}$
+		\end{indented}
+	\end{indented}
+\end{document}
