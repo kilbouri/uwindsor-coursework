@@ -1,5 +1,6 @@
 **/Submitted
 **/res
+**/.vscode
 *.exe
-*.vscode-workspace
-**/*.cddx
+*.code-workspace
+*.cddx
