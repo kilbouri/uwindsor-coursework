@@ -1,0 +1,30 @@
+Part 3: Explanations
+    create_node uses calloc to allocate memory for the node.
+    calloc is used so that the string is allocated with all zeros,
+    streamlining code over the alternative: malloc and memset. The
+    code as a result is much easier to read, despite being a few
+    bytes slower.
+    create_node runs in O(1) time despite using calloc and strncpy.
+    Both calloc and strncpy within this usage are amortized
+    constants in this case, as both the structure and the
+    strncpy have a fixed upper limit.
+
+    free_node just stores a copy of the next node's address,
+    frees the node, and returns the pointer.
+    free_node als runs in O(1) since it literally only uses
+    variable assignments and free which is another amortized
+    constant (despite having varying, non-standard, implementations)
+    for the reason described above.
+
+    concat_nodes runs in O(n) as it performs the following simple
+    algorithm for each node, until the node is NULL:
+        1. copy the string to str + offset
+        2. use strlen to determine the length of this node's string
+            (an amoritized constant, due to fixed-length strings)
+        3. If the length is not 0, then
+            4. Add strlen to the offset
+            5. Set str[offset] to a space, ' '.
+            6. Increment offset to reflect the appended space.
+        7. Finally, set the null termination at str[offset]
+    It's easy to see that this algorithm is O(1), and since it is
+    performed for each node, the overall running time is O(n).

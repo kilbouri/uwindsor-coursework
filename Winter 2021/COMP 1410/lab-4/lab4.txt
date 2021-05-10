@@ -1,0 +1,24 @@
+Part 1: Trace of Selection Sort on "expand"
+	expand
+	axpend (e, a)
+	adpenx (x, d)
+	adepnx (p, e)
+	adenpx (p, n : sorted)
+	adenpx (extra pass as the algorithm verifies the last two characters)
+	adenpx (extra pass as the algorithm verifies the last character)
+
+Part 4: Implentation Details
+	select_min() traverses the provided string, setting the pointer "lowest" to the current address if needed.
+	"lowest" is initialized to the first index of the string, since any other value would be incorrect in
+	the case of empty strings (those which are terminated immediately). Since it traverses the string fully,
+	without ever returning until the entire string has been traversed, it runs in O(n) time.
+
+	str_sort() traverses the provided string as well, this time swapping the value of the current index and the
+	lowest value (as determined by select_min()).
+	str_sort() runs in O(n^2) time, since it traverses the string once, then for each step along the way it 
+	calls select_min(), which runs in O(n). O(n) * O(n) is O(n^2). 
+	It uses O(n) swaps since it only swaps once for each step through the traversal.
+
+Extra:
+	If one should wish to add new tests, they should add them to the testStrings array (according to the provided key)
+	and increase the STR_TEST_COUNT appropriately.

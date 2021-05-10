@@ -1,0 +1,24 @@
+Part 3 - Explanations:
+	find_id starts with the pointer to the first element, then increments it
+	until either a matching ID is found or the loop terminates by reaching 
+	start + len. If it terminates because it reached the end, it returns false.
+	Otherwise, the name is copied with strncpy (strcpy with an upper limit,
+	in this case 19 characters) and the function returns true.
+
+	find_name walks the array, keeping track of how many students have had
+	a matching name. Each time a matching name is found, it is stored into
+	the list of IDs and the count is incremented. The index at which the
+	ID is stored at is equivalent to the count found (before incrementing).
+
+	change_name simply uses strncpy to copy the first 19 characters into the
+	student's name field. strncpy handles adding the termination character.
+
+	
+	find_id is worst-case O(n) since we only ever traverse the array of
+	n elements once. find_id is best-case O(1) since if the first ID matches
+	then the loop terminates instantly
+
+	find_name is worst-case O(n) since we only ever traverse the array once.
+	While strcmp is normally O(n), which would make find_name O(n^2), since the
+	length of any given name is at most 19, independent of the size of the array,
+	we can consider strcmp to be, effectively, O(1). Thus find_name is O(n).

@@ -1,0 +1,79 @@
+\documentclass[12pt]{book}
+\setlength{\headheight}{15pt}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{lastpage}
+
+% begin custom header shit
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{COMP2650 Lecture 2 - Number Systems I}
+\rhead{Isaac Kilbourne}
+\rfoot{Page \thepage\ of \pageref{LastPage}}
+% end custom header shit
+
+\newenvironment{indented}[1] {
+	\begin{list}{}{\setlength{\leftmargin}{#1}}
+		\item[]
+}{\end{list}}
+
+\begin{document}
+	\noindent
+	4. Convert the following numbers to binary:
+
+
+	\begin{indented}{5mm}
+		a. (5F.A2)$_{16}$
+		\begin{indented}{5mm}
+			$\begin{array}{c|c|c|c|c}
+				(5)_{16} \to 5 & ($F$)_{16} \to 15 & . & ($A$)_{16} \to 10 & (2)_{16} \to 2\\
+				0101 & 1111 & . & 1010 & 0010
+			\end{array}$
+
+			$\therefore$ (5F.A2)$_{16}$ = (0101 1111 . 1010 0010)$_2$
+		\end{indented}
+	\end{indented}
+
+	\begin{indented}{5mm}
+		b. (213.32)$_4$
+		\begin{indented}{5mm}
+			$\begin{array}{c|c|c|c|c|c}
+				(2)_4 \to 2 & (1)_4 \to 1 & (3)_4 \to 3 & . & (3)_4 \to 3 & (2)_4 \to 2\\
+				10 & 01 & 11 & . & 11 & 10
+			\end{array}$
+
+			$\therefore$ (213.32)$_4$ = (10 01 11 . 11 10)$_2$
+		\end{indented}
+	\end{indented}
+
+	\noindent
+	5. Obtain the 1's and 2's complements of the following binary numbers by showing the steps:
+	\begin{indented}{5mm}
+		a. 10010000
+		\begin{indented}{5mm}
+			1s complement: 01101111 (found by simply inverting the bits).
+			
+			2s complement: 01110000 (found by adding one to the 1s complement)
+		\end{indented}
+	\end{indented}
+
+	\begin{indented}{5mm}
+		b. 00000000
+		\begin{indented}{5mm}
+			1s complement: 11111111 (inverting all bits)
+			
+			2s complement: (1)00000000 (adding one to the 1s complement)
+		\end{indented}
+	\end{indented}
+
+	\begin{indented}{5mm}
+		c. 11111111
+		\begin{indented}{5mm}
+			1s complement: 00000000 (inverting all bits)
+
+			2s complement: 00000001 (adding one to the 1s complement)
+		\end{indented}
+	\end{indented}
+\end{document}

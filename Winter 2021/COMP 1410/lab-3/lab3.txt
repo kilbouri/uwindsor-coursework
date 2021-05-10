@@ -1,0 +1,25 @@
+Part 3: Explainations
+	matrix_equals():
+		Iterates over the arrays in row-major form, returning 0 (false) 
+		if any one pair of values is not equal. Otherwise the loops run
+		to completion and the function returns 1 (true).
+	
+	matrix_add():
+		Similar to matrix_equals, iterates over the arrays in row-major
+		form, placing A[r][c] + B[r][c] into C[r][c].
+
+	negate_column():
+		Iterates over each row, multiplying A[row][c] by -1. Clean, 
+		simple, and fast.
+
+	negate_row():
+		C stores 2D arrays in row-major form. That is, each row is stored
+		one after the other. To access a specific address, the formula is:
+			address = base_address + (row * column_count) + column
+
+		negate_row() uses a slightly modified version of this formula to
+		generate the subscript which will point to the correct address:
+			subscript = (row * column_count) + column
+			
+		It iterates over each column in the specified row and multiplies the
+		value by -1.

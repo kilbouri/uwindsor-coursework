@@ -1,0 +1,3 @@
+Part 3 - digit_sum_iterative(n) and digit_sum_recursive(n) explanations:
+	the iterative digit sum allocates a sum, then iterates over the number, dividing by 10 each time. In each pass, the sum is increased by n%10, which is the right-most digit in the number.
+	the recursive digit sum uses integer division to call itself until n is 0 or less, at which point it returns 0. If it does not return 0, then it takes the last digit and adds it to the result of the sum of n divided by 10.

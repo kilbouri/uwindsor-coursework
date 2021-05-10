@@ -1,0 +1,19 @@
+Part 3: Explanation
+	create_student allocates memory for an integer and a character pointer.
+	Then, it measures the length of the passed string and allocates enough memory
+	for it and the termination character. It copies the string into the allocated
+	memory and sets the student's name pointer to the allocated string.
+
+	change_name measures the length of the new name, allocates enough memory for it
+	and its termination character, then, assuming it was successfully allocated, it
+	copies the new name into the allocated memory, frees the pointer to the old name, 
+	and updates the student to point to the new name.
+
+	free_student frees the name pointer and then the whole student.
+
+Part 3: Running Times
+	create_student: O(1)* since no loops or reallocs are used (all ops are constant time)
+	   change_name: O(1)* since no loops or reallocs are used (all ops are constant time)
+	  free_student: O(1)* since no loops or reallocs are used (all ops are constant time)
+
+	*assuming calloc() is also O(1).

@@ -1,0 +1,48 @@
+1d - Explanations
+	make_move():
+		Assumes a valid column is provided, then starts scanning downwards in that 
+		column until a non-empty character is reached. Sets the character in the row
+		above to the provided player character.
+	
+	check_win():
+		Traverses the game board from left to right, bottom to top, running the checks 
+		for victory where possible. Each check is simply a hard-coded conditional 
+		expression that looks at each of the three squares that need to match the player
+		character in each direction. No checks are run if the current position doesn't
+		belong to the correct player.
+
+	check_stalemate():
+		Traverses the top row of the game board, returning false if it finds an empty
+		position. If the traversal finishes without returning, the game is assumed to
+		be in stalemate. No check occurs for positions below, since in regular usage
+		the pieces will always fill from bottom to top.
+
+	print_board():
+		Starts by printing the top of the board. Then, for each character in the board,
+		it prints either a space, or the player character (defined by OS, either an ASCII
+		square on Unix, or X and O on non-Unix), optionally coloured (also determined by
+		OS, red and blue on Unix, and none on non-Unix). After each character, unless
+		it is the right-most character of the row, it prints an extra space to make the
+		board appear more square when it is printed to a console. Finally, the bottom
+		section of the border and the column numbers are printed.
+
+===========================================================================================
+
+2c - Capital Explanation
+	first_capital() uses a modified binary search, where the left/right decision is made
+	depending on whether or not the current midpoint is a capital letter or not. Returns
+	when either the midpoint is a capital with a lowercase to its left, or when the left
+	and right edges of the substring swap sides. Since the length of the string being 
+	searched is approximately halved each time the loop runs, the function requires 
+	O(log_2 n) cycles to complete.
+
+===========================================================================================
+
+3c - Deepest Substring Explanation
+	deepest_substring() traverses the provided string, keeping track of the max
+	depth it has found, as well as its current depth, and the start and endpoints
+	of the deepest substring it found. Once the string has been traversed, the
+	susbtring formed between the start and end points is copied into out, followed
+	by a string termination character to prevent segmentation faults if the
+	out array is later printed or used by other functions which expect a termination
+	(such as strlen or strcmp).
