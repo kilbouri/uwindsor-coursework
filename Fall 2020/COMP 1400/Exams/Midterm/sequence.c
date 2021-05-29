@@ -4,6 +4,12 @@
 
 #include <stdio.h>
 
+// Write a program which calculates the sum of the first N terms of the
+// inverse factorial series (1/1! + 1/2! + 1/3! + ...).
+// Your program should output each term that it is summing. Restrict N to
+// be between 1 and 7 inclusive.
+// Your program should repeat until the user selects 0 for "no".
+
 int main(void) {
 
 	int retry = 1, input = 0;

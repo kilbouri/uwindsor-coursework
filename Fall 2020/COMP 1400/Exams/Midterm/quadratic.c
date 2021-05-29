@@ -3,6 +3,12 @@
 // Date: Nov 14, 2020
 #include <stdio.h>
 
+// Write a program that computes the value of a quadratic equation.
+// Your program should ask the user for the coefficients, a constant,
+// and the x value to evaluate the function at.
+// Also, if the value of x is greater than 40,000, notify the user
+// that overflow may occur in the result.
+
 int main(void) {
 
 	// get input

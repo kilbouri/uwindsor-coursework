@@ -4,6 +4,12 @@
 #include <stdio.h>
 #include <math.h>
 
+// Given two numbers, decide whether they are "equal" or not, under the following
+// rules for equality:
+//     - same number of digits
+//     - digits sum to the same number
+// Repeat until the user enters 0 for "no".
+
 // This question did not explicitly instruct how to handle negative signs. 
 // I will consider them as making the first digit negative.
 int main(void) {
